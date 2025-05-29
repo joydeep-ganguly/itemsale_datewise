@@ -30,11 +30,11 @@ def index():
     else:
         form_inputs = pd.DataFrame(request.form.to_dict(),index=[0])
         #form_inputs['area'] = form_inputs.area.str.strip()
-        form_inputs['area'] = form_inputs.area.apply(lambda x : '24 PARGANAS(S)' if x == '24PGS(S)' else x)
-        form_inputs['area'] = form_inputs.area.apply(lambda x : '24 PARGANAS(N)' if x == 'NORTH 24 PGS' else x)
-        form_inputs = form_inputs[(form_inputs.area!='-') & (form_inputs.area!='')]
+        form_inputs['area'] = form_inputs['area'].apply(lambda x : '24 PARGANAS(S)' if x == '24PGS(S)' else x)
+        form_inputs['area'] = form_inputs['area'].apply(lambda x : '24 PARGANAS(N)' if x == 'NORTH 24 PGS' else x)
+        form_inputs = form_inputs[(form_inputs['area'] != '-') & (form_inputs['area'] != '')]
 
-        form_inputs.area = form_inputs.area.apply(lambda x : area_encoder[x])
+        form_inputs['area'] = form_inputs['area'].apply(lambda x : area_encoder[x])
         form_inputs.itemcode = form_inputs.itemcode.apply(lambda x : item_encoder[x])
 
         form_inputs['ddate'] = pd.to_datetime(form_inputs.ddate, format='%d-%m-%Y')

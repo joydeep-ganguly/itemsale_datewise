@@ -11,16 +11,6 @@ festival = pd.read_pickle('./festivals.pkl')
 scaler = pickle.load(open('./item_scaler.pkl','rb'))
 model = pickle.load(open('./item_model.pkl','rb'))
 
-def isweekend(year,month,day):
-    d = datetime(year,month,day)
-    if d.weekday() > 4:
-        return 1
-    else:
-        return 0
-def day_of_week(year,month,day):
-    d = datetime(year,month,day)
-    return d.weekday()
-
 app = Flask(__name__)
 
 @app.route('/',methods=['GET','POST'])
@@ -33,7 +23,7 @@ def index():
         #form_inputs['area'] = form_inputs['area'].apply(lambda x : '24 PARGANAS(N)' if x == 'NORTH 24 PGS' else x)
         #form_inputs = form_inputs[(form_inputs['area'] != '-') & (form_inputs['area'] != '')]
 
-        form_inputs['area'] = form_inputs['area'].apply(lambda x : area_encoder[x])
+        #form_inputs['area'] = form_inputs['area'].apply(lambda x : area_encoder[x])
         form_inputs.itemcode = form_inputs.itemcode.apply(lambda x : item_encoder[x])
 
         form_inputs['ddate'] = pd.to_datetime(form_inputs.ddate, format='%d-%m-%Y')
@@ -58,7 +48,7 @@ def index():
         X.columns = features.columns
 
         prediction = model.predict(X)
-        return str(np.round(prediction[0]))
+        #return str(np.round(prediction[0]))
 
 if __name__ == '__main__':
     app.run(debug=True)

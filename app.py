@@ -47,10 +47,10 @@ def index():
         X = scaler.transform(features)
         X = pd.DataFrame(X)
         X.columns = features.columns
-        return X.to_html()
+        #return X.to_html()
 
         prediction = model.predict(X)
-        #return str(np.round(prediction[0]))
+        return str(np.round(prediction[0]))
 
 if __name__ == '__main__':
     app.run(debug=True)

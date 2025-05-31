@@ -3,5 +3,7 @@ flask==3.1.0
 pandas==2.2.3
 numpy==1.26.4
 scikit-learn==1.2.2
-tensorflow[and-cuda]
+cuda==12.5
+cudnn==8.9
+tensorflow==2.16.1
 keras

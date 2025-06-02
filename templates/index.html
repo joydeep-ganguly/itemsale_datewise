@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Datewise Item Sale</title>
-    </head>
-    <body>
-        <form method="POST">
-            <label for="ddate">Date</label><br>
-            <input type="text" name="ddate" id="ddate"><br><br>
+  <head>
+    <title>Item Sale Prediction</title>
+  </head>
+  <body>
+    <h3>Pedict sale of item(s) on a particular date</h3><br><br>
+    <div>
+      <p><a href={{url_for("input")}}>Input individual data</a></p>
+    </div>
+    <div>
+      <p><a href={{url_for("upload_file")}}>Upload File</a></p>
+    </div>
 
-            <label for="area">Area</label><br>
-            <input type="text" name="area" id="area"><br><br>
-
-            <label for="itemcode">Item Code</label><br>
-            <input type="text" name="itemcode" id="itemcode"><br><br>
-
-            <input type="submit">
-        </form>
-    </body>
+  </body>
 </html>

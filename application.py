@@ -55,10 +55,11 @@ def input():
     if request.method == 'GET':
         return render_template('input.html')
     else:
-        #form_inputs = pd.DataFrame(request.form.to_dict(),index=[0])
-        prediction = implement_model(pd.DataFrame(request.form.to_dict(),index=[0]))
-
-        return str(np.round(prediction[0]))
+        df = pd.DataFrame(request.form.to_dict(),index=[0])
+        strdate = df.ddate[0]
+        df['ddate'][0] = '-'.join(strdate.split('-')[::-1])
+        prediction = implement_model(df)
+        return render_template("single.html", pred=f'Expected Sales in Quantity :{str(np.round(prediction[0]))}')
 
 @app.route('/upload',methods=['GET','POST'])
 def upload_file():
@@ -75,8 +76,8 @@ def upload_file():
         prediction = implement_model(df)
 
         result = pd.concat([df,pd.Series(np.round(prediction))],axis=1)
-        result.rename(columns={0 : 'Sale'},inplace=True)
-        return result.to_html()
+        result.columns = ['Date','Area','Item Code','Sale']
+        return render_template("file.html",tables=[result.to_html(classes='data',header="true")])
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sales Prediction results</title>
+  </head>
+  <body>
+    <button onclick="history.back()">Back</button>
+    {% for row in tables %}
+        {{ row|safe }}
+    {% endfor %}
+
+  </body>
+</html>

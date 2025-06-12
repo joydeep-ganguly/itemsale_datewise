@@ -7,15 +7,30 @@
     <h2>Enter Input</h2>
     <form method="POST">
       <label for="ddate">Date</label><br />
-      <input type="text" name="ddate" id="ddate" /><br /><br />
+      <input type="text" 
+        placeholder="DD-MM-YYYY" 
+        onfocus="(this.type='date')"
+        onblur="(this.type='text')"
+        name="ddate" id="ddate" required /><br /><br />
 
       <label for="area">Area</label><br />
-      <input type="text" name="area" id="area" /><br /><br />
+      <input type="text" name="area" id="area" onchange="upperCase()" required /><br /><br />
 
       <label for="itemcode">Item Code</label><br />
-      <input type="text" name="itemcode" id="itemcode" /><br /><br />
+      <input type="text" name="itemcode" id="itemcode" onchange="upperCase()" required /><br /><br />
 
       <input type="submit" />
     </form>
+    <br><br>
+    <button onclick="history.back()">Back</button>
+
+    <script>
+      function upperCase() {
+      const x = document.getElementById("area");
+      x.value = x.value.toUpperCase();
+      const y = document.getElementById("itemcode");
+      y.value = y.value.toUpperCase();
+      }
+    </script>
   </body>
 </html>
